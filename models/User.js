@@ -15,10 +15,6 @@ const UserSchema = new Schema(
       required: "Email is required",
       match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
     },
-    userCreated: {
-      type: Date,
-      default: Date.now,
-    },
     //Array of _id values referencing the Thought model
     thoughts: [
       {
@@ -49,4 +45,4 @@ UserSchema.virtual("friendCount").get(function () {
 
 const User = model("User", UserSchema);
 
-module.export = User;
+module.exports = User;
