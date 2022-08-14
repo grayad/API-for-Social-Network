@@ -32,7 +32,7 @@ const thoughtController = {
       });
   },
   // create Thought
-  createThought({ body }, res) {
+  createThought({ params, body }, res) {
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
