@@ -33,8 +33,10 @@ const thoughtController = {
   },
   // create Thought
   createThought({ params, body }, res) {
+    console.log(body);
     Thought.create(body)
       .then(({ _id }) => {
+        console.log("USER ID", _id);
         return User.findOneAndUpdate(
           { _id: params.userId },
           //   use $push method to add the thoughts's id to the specific user
@@ -46,7 +48,6 @@ const thoughtController = {
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this id!" });
-          return;
         }
         res.json(dbUserData);
       })
