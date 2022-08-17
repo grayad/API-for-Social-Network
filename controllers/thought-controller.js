@@ -9,10 +9,7 @@ const thoughtController = {
       // sort DESC by id value, newest Thought first
       .sort({ _id: -1 })
       .then((dbThoughtData) => res.json(dbThoughtData))
-      .catch((err) => {
-        console.log(err);
-        res.status(400).json(err);
-      });
+      .catch((err) => res.json(err));
   },
 
   // get one Thought by id
@@ -26,14 +23,10 @@ const thoughtController = {
         }
         res.json(dbThoughtData);
       })
-      .catch((err) => {
-        console.log(err);
-        res.status(400).json(err);
-      });
+      .catch((err) => res.json(err));
   },
   // create Thought
   createThought({ params, body }, res) {
-    console.log(body);
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
@@ -45,12 +38,14 @@ const thoughtController = {
         );
       })
       .then((dbUserData) => {
+        console.log(">>>>DATA>>>", dbUserData);
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this id!" });
+          return;
         }
         res.json(dbUserData);
       })
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.json(err));
   },
   // update Thought by id
   updateThought({ params, body }, res) {
@@ -62,7 +57,7 @@ const thoughtController = {
         }
         res.json(dbThoughtData);
       })
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.json(err));
   },
   // delete Thought
   deleteThought({ params }, res) {
@@ -86,7 +81,7 @@ const thoughtController = {
       //   }
       //   res.json(dbUserData);
       // })
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.json(err));
   },
 };
 
