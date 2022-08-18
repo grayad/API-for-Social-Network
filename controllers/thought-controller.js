@@ -1,4 +1,4 @@
-const { Thought } = require("../models");
+const { Thought, User } = require("../models");
 
 const thoughtController = {
   // get all thoughts
@@ -29,7 +29,6 @@ const thoughtController = {
   createThought(req, res) {
     Thought.create(req.body)
       .then((result) => {
-        console.log(result);
         return User.findOneAndUpdate(
           { _id: req.params.userId },
           //   use $push method to add the thoughts's id to the specific user
@@ -39,7 +38,6 @@ const thoughtController = {
         );
       })
       .then((dbUserData) => {
-        console.log(">>>>DATA>>>", dbUserData);
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this id!" });
           return;
@@ -82,21 +80,20 @@ const thoughtController = {
         if (!dbThoughtData) {
           res.status(404).json({ message: "No thought found with this id!" });
         }
-        // // use thought data to identify and remove it from the associated user
-        // return User.findOneAndUpdate(
-        //   { _id: params.userId },
-        //   //   $pull is the mongo operation to remove the thought
-        //   { $pull: { thoughts: params.thoughtId } },
-        //   { new: true }
-        // );
-        res.json(dbThoughtData);
+        // use thought data to identify and remove it from the associated user
+        return User.findOneAndUpdate(
+          { _id: params.userId },
+          //   $pull is the mongo operation to remove the thought
+          { $pull: { thoughts: params.thoughtId } },
+          { new: true }
+        );
       })
-      // .then((dbUserData) => {
-      //   if (!dbUserData) {
-      //     res.status(404).json({ message: "No user found with this id!" });
-      //   }
-      //   res.json(dbUserData);
-      // })
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          res.status(404).json({ message: "No user found with this id!" });
+        }
+        res.json(dbUserData);
+      })
       .catch((err) => res.json(err));
   },
   removeReaction({ params }, res) {
