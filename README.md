@@ -3,7 +3,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
   ## Project Description
-  an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. 
+  An API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. 
     
   ## Table of Contents
   - [Installation](#installation)
