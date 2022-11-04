@@ -18,11 +18,14 @@
   npm i
 
   ## Technologies
-  Built using JavaScript, Node.js, express.js, and MongoDb/Mongoose
+  - JavaScript
+  - Node.js
+  - Express.js
+  - MongoDb/Mongoose
   
 
   ## Walkthrough
-  https://drive.google.com/file/d/1li7dchz6HPuZUhJM9sXdJWYgf0qM0-Gn/view![image](https://user-images.githubusercontent.com/102432930/185514070-4ea96f55-8adc-4178-a07c-a185b720f6db.png)
+  https://drive.google.com/file/d/1li7dchz6HPuZUhJM9sXdJWYgf0qM0-Gn/view
   
   ## License
   This application is covered under MIT
